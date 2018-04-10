@@ -59,9 +59,9 @@ El proyect consta de dos partes. Un programa Arduino que _escucha_ por el puerto
 Otro programa escrito en Python `ym_streamer.py` se encarga de leer el archivo en formato *YM* y enviar los datos en el orden correcto -por defecto los datos de un fichero YM están guardados con _interleaving_-. La forma de usar este archiov es:
 ```
 ym_streamer puerto_usb nombre_archivo_ym_descromprimido
-
+```
 p.ej
-
+```
 ym_streamer /dev/ttyUSB0 SONG1.YM
 ```
 
