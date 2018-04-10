@@ -12,7 +12,7 @@ un volcado de los 16 registros de 8 bits del chip YM2149 que se efectúa cada 1/
 
 ```
  Fill the "x" bits with the original chip value and set all other bits to 0.
-	  _________________________________________________
+	        _________________________________________________
 			      Frame register detail
 		¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 		    b7 b6 b5 b4 b3 b2 b1 b0
