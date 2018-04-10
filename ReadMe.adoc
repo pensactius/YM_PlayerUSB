@@ -8,7 +8,7 @@
 = Project: {Project}
 
 Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible como el *AY-3-8910*-. El formato YM no es más que
-un volcado de los 16 registros de 8 bits del chip YM2149 volcados en un intervale de 1/50s. El programa _escucha_ por el puerto serie a 9600 bps la llegada de 16 bytes -correspondientes al volcado de los 16 registros-. El valor de los registros deben recibirse directamente en orden correcto (es decir, se ha corregido el 'interleaving' original del fichero YM). Una vez recibidos los 16 bytes se escribe cada valor correspondiente al registro adecuado (byte 0 al registro 0, byte 1 al registro 2, etc.) como se muestra a continuación:
+un volcado de los 16 registros de 8 bits del chip YM2149 que se efectúa cada 1/50s. El programa _escucha_ por el puerto serie a 9600 bps la llegada de 16 bytes -correspondientes al volcado de los 16 registros-. El valor de los registros deben recibirse directamente en orden correcto (es decir, se ha corregido el 'interleaving' original del fichero YM). Una vez recibidos los 16 bytes se escribe cada valor correspondiente al registro adecuado (byte 0 al registro 0, byte 1 al registro 2, etc.) como se muestra a continuación:
 
 ```
  Fill the "x" bits with the original chip value and set all other bits to 0.
