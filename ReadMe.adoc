@@ -30,7 +30,9 @@ available.
 
 Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible como el *AY-3-8910*- y controlado por Arduino UNO (o Nano) originales. El formato YM no es más que un volcado de los 16 registros de 8 bits del chip YM2149 que se efectúa cada 1/50s. 
 
-El proyect consta de dos partes. Un programa Arduino que _escucha_ por el puerto serie a 9600 bps la llegada de 16 bytes -correspondientes al volcado de los 16 registros-. Una vez recibidos los 16 bytes se escribe cada valor correspondiente al registro adecuado (byte 0 al registro 0, byte 1 al registro 2, etc.) como se muestra a continuación:
+El proyecto consta de dos partes:
+
+- Un programa Arduino que _escucha_ por el puerto serie a 9600 bps la llegada de 16 bytes -correspondientes al volcado de los 16 registros-. Una vez recibidos los 16 bytes se escribe cada valor correspondiente al registro adecuado (byte 0 al registro 0, byte 1 al registro 2, etc.) como se muestra a continuación:
 
 ```
  Fill the "x" bits with the original chip value and set all other bits to 0.
@@ -56,38 +58,28 @@ El proyect consta de dos partes. Un programa Arduino que _escucha_ por el puerto
 		r15			     Data of I/O port B
 		_________________________________________________
 ```
-Otro programa escrito en Python `ym_streamer.py` se encarga de leer el archivo en formato *YM* y enviar los datos en el orden correcto -por defecto los datos de un fichero YM están guardados con _interleaving_-. La forma de usar este archiov es:
+- Otro programa escrito en Python `ym_streamer.py` se encarga de leer el archivo en formato *YM* y enviar los datos en el orden correcto -por defecto los datos de un fichero YM están guardados con _interleaving_-. La forma de usar este archiov es:
+
 ```
 ym_streamer puerto_usb nombre_archivo_ym_descromprimido
 ```
+
 p.ej
+
 ```
 ym_streamer /dev/ttyUSB0 SONG1.YM
 ```
 
 *Nota 1*: Es necesario una placa Arduino UNO (o Nano) original, no sirven versiones chinas debido al uso de instrucciones
-del chip AVR propias).
+del chip AVR propias.
 
 *Nota 2*: Los archivos YM suelen estar comprimidos con el algoritmo _lha_ y por tanto hay que descomprimirlos primero. El programa _7z_ o _7zip_ los puede descomprimir sin problemas.
 
 
-Detalles de programación:
------------------------
+== Detalles de programación:
+
 _BV(n) es una macro del micro AVR que facilita crear la máscara adecuada de bits para poner bits a 1/0. 
 Es equivalente a (1 << n) (uno shift left n veces).
-
-Version compatible con el Shield YM2149 de PensActius:
-  
-  D2 .. D9  DATOS
-  D10       BDIR
-  D11       BC1
-  
-Traduccion Pines digitales a PORTx (aka PBx, PDx):
-  
-  PD2 .. PD7 (Avr) = D2 .. D7 (Arduino)
-  PB0 .. PB7 (Avr) = D8 .. D9 (Arduino)
-  PB2 .. PB3 (Avr) = D10 .. D11 (Arduino)
-
 
 == Step 1: Installation
 Please describe the steps to install this project.
@@ -107,6 +99,7 @@ Assemble the circuit following the diagram layout.png attached to the sketch
   A2        connects to BC1 into YM2149
   A3        connects to BDIR into YM2149
   BC2       is always connected to +5V
+  RESET	    is always connected to +5V
 
 == Step 3: Load the code
 
