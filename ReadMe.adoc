@@ -55,7 +55,7 @@ Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible co
 		_________________________________________________
 ```
 
-*Importante*: Es necesario una placa Arduino UNO (o PRO mini) original, no sirven versiones chinas debido al uso de instrucciones
+*Importante*: Es necesario una placa Arduino UNO (o Nano) original, no sirven versiones chinas debido al uso de instrucciones
 del chip AVR propias).
 
 NOTAS:
