@@ -9,27 +9,30 @@
 Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible como el *AY-3-8910*-. El formato YM no es más que
 un volcado de los 16 registros de 8 bits del chip YM2149 volcados en un intervale de 1/50s. El programa _escucha_ por el puerto serie a 9600 bps la llegada de 16 bytes -correspondientes al volcado de los 16 registros-. El valor de los registros deben recibirse directamente en orden correcto (es decir, se ha corregido el 'interleaving' original del fichero YM). Una vez recibidos los 16 bytes se escribe cada valor correspondiente al registro adecuado (byte 0 al registro 0, byte 1 al registro 2, etc.) como se muestra a continuación:
 
-|===
-|        Frame register detail
-¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|
-|    |b7 b6 b5 b4 b3 b2 b1 b0|
-| r0 |x  x  x  x  x  x  x  x |  Period voice A
-| r1 |            x  x  x  x |  Fine period voice A
-| r2 |x  x  x  x  x  x  x  x |  Period voice B
-| r3 |            x  x  x  x |  Fine period voice B
-| r4 |x  x  x  x  x  x  x  x |  Period voice C
-| r5 |            x  x  x  x |  Fine Period voice C
-| r6 |         x  x  x  x  x |  Noise period
-| r7 |      x  x  x  x  x  x |  Mixer control
-| r8 |         x  x  x  x  x |  Volume control A
-| r9 |         x  x  x  x  x |  Volume control B
-|r10 |         x  x  x  x  x |  Volume control C
-|r11 |x  x  x  x  x  x  x  x |  Envelope high period
-|r12 |x  x  x  x  x  x  x  x |  Envelope low period
-|r13 |            x  x  x  x |  Envelope shape
-|r14 | No se usa (ignorado)  |  Dato Puerto A
-|r15 | No se usa (ignorado)  |  Dato Puerto B
-|==
+```
+ Fill the "x" bits with the original chip value and set all other bits to 0.
+	  _________________________________________________
+			      Frame register detail
+		¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+		    b7 b6 b5 b4 b3 b2 b1 b0
+		 r0 x  x  x  x  x  x  x  x   Period voice A
+		 r1             x  x  x  x   Fine period voice A
+		 r2 x  x  x  x  x  x  x  x   Period voice B
+		 r3             x  x  x  x   Fine period voice B
+		 r4 x  x  x  x  x  x  x  x   Period voice C
+		 r5             x  x  x  x   Fine Period voice C
+		 r6          x  x  x  x  x   Noise period
+		 r7       x  x  x  x  x  x   Mixer control
+		 r8          x  x  x  x  x   Volume control A
+		 r9          x  x  x  x  x   Volume control B
+		r10          x  x  x  x  x   Volume control C
+		r11 x  x  x  x  x  x  x  x   Envelope high period
+		r12 x  x  x  x  x  x  x  x   Envelope low period
+		r13             x  x  x  x   Envelope shape
+		r14			     Data of I/O port A
+		r15			     Data of I/O port B
+		_________________________________________________
+```
 
 *Importante*: Es necesario una placa Arduino UNO (o PRO mini) original, no sirven versiones chinas debido al uso de instrucciones
 del chip AVR propias).
