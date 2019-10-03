@@ -4,7 +4,7 @@
 :Revision: version#
 :License: Public Domain
 :Project: YM_PlayerUSB
-
+:imagesdir: images/
 = Project: {Project}
 
 Fork del proyecto original creado por _Florent Flament_.
@@ -91,7 +91,8 @@ For example:
 
 == Paso 2: Conexionado
 
-Assemble the circuit following the diagram layout.png attached to the sketch
+Monta el circuito siguiendo el siguiente esquema: 
+image::YM-Player.svg
   
   D2 .. D9  Conectado a DAx del YM2149
   D11       Conectado a Clk del YM2149
