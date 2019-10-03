@@ -28,7 +28,7 @@ available.
 [4]: https://www.youtube.com/watch?v=MTRJdDbY048
 ```
 
-Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible como el *AY-3-8910*- y controlado por Arduino UNO (o Nano) originales. El formato YM no es más que un volcado de los 16 registros de 8 bits del chip YM2149 que se efectúa cada 1/50s. 
+Reproductor de archivos *YM* (Atari ST) usando el chip *YM2149* -o compatible como el *AY-3-8910*- y controlado por Arduino UNO (o cualquier placa basada en ATmega328P) originales. El formato YM no es más que un volcado de los 16 registros de 8 bits del chip YM2149 que se efectúa cada 1/50s. 
 
 El proyecto consta de dos partes:
 
@@ -58,7 +58,7 @@ El proyecto consta de dos partes:
 		r15			     Data of I/O port B
 		_________________________________________________
 ```
-- Otro programa escrito en Python `ym_streamer.py` se encarga de leer el archivo en formato *YM* y enviar los datos en el orden correcto -por defecto los datos de un fichero YM están guardados con _interleaving_-. La forma de usar este archiov es:
+- Otro programa escrito en Python `ym_streamer.py` se encarga de leer el archivo en formato *YM* y enviar los datos en el orden correcto -por defecto los datos de un fichero YM están guardados con _interleaving_-. La forma de usar este archivo es:
 
 ```
 ym_streamer puerto_usb nombre_archivo_ym_descromprimido
@@ -70,8 +70,7 @@ p.ej
 ym_streamer /dev/ttyUSB0 SONG1.YM
 ```
 
-*Nota 1*: Es necesario una placa Arduino UNO (o Nano) original, no sirven versiones chinas debido al uso de instrucciones
-del chip AVR propias.
+*Nota 1*: Es necesario una placa Arduino UNO (o cualquiera basada en ATmega328P) original, no sirven versiones chinas debido al uso de instrucciones del chip AVR propias.
 
 *Nota 2*: Los archivos YM suelen estar comprimidos con el algoritmo _lha_ y por tanto hay que descomprimirlos primero. El programa _7z_ o _7zip_ los puede descomprimir sin problemas.
 
@@ -90,18 +89,18 @@ For example:
 2. Edit as you like
 3. Release to the World!
 
-== Step 2: Assemble the circuit
+== Paso 2: Conexionado
 
 Assemble the circuit following the diagram layout.png attached to the sketch
   
-  D2 .. D9  connect to DAx into YM2149
-  D11       Connects to Clk into YM2149
-  A2        connects to BC1 into YM2149
-  A3        connects to BDIR into YM2149
-  BC2       is always connected to +5V
-  RESET	    is always connected to +5V
+  D2 .. D9  Conectado a DAx del YM2149
+  D11       Conectado a Clk del YM2149
+  A2        Conectado a BDIR del YM2149
+  A3        Conectado a BC1 del YM2149
+  BC2       Conectado a +5V
+  RESET	    Conectado a +5V
 
-== Step 3: Load the code
+== Step 3: Ejecución de programas (TODO)
 
 Upload the code contained in this sketch on to your board
 
@@ -115,13 +114,13 @@ Upload the code contained in this sketch on to your board
   └── ReadMe.adoc         => this file
 ....
 
-=== License
+=== License: TODO
 This project is released under a {License} License.
 
 === Contributing
 To contribute to this project please contact pensactius <pensactius@gmail.com>
 
-=== BOM
+=== BOM: TODO
 Add the bill of the materials you need for this project.
 
 |===
