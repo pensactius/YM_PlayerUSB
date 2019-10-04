@@ -68,12 +68,18 @@ class YmReader(object):
         cnt = self.__header['nb_frames']
         regs = [self.__fd.read(cnt) for i in range(16)]
         self.__data = [f for f in zip(*regs)]
+    
+    def __read_data_non_interleaved(self):
+        cnt = self.__header['nb_frames']
+        self.__data = [self.__fd.read(16) for i in range(cnt)]              
 
     def __read_data(self):
         if not self.__header['interleaved']:
-            raise Exception(
-                'Unsupported file format: Only interleaved data are supported')
-        self.__read_data_interleaved()
+            #raise Exception(
+            #    'Unsupported file format: Only interleaved data are supported')
+            self.__read_data_non_interleaved()
+        else:
+          self.__read_data_interleaved()
 
     def __check_eof(self):
         if self.__fd.read(4).decode() != 'End!':
@@ -128,13 +134,18 @@ def main():
 
     with serial.Serial(sys.argv[1], BAUD) as ser:
         time.sleep(2)  # Wait for Arduino reset
-        frame_t = time.time()
+        #frame_t = time.time()
+        frame_t = time.perf_counter()
         try:
             for i in range(header['nb_frames']):
                 # Substract time spent in code
-                time.sleep(1. / header['frames_rate'] -
-                           (time.time() - frame_t))
-                frame_t = time.time()
+                #time.sleep(1. / header['frames_rate'] -
+                #           (time.time() - frame_t))
+                #frame_t = time.time()
+                target_time = 1./ header['frames_rate']
+                while (time.perf_counter() -frame_t)< target_time:
+                  pass
+                frame_t = time.perf_counter()
                 ser.write(data[i])
                 i += 1
 
@@ -146,12 +157,13 @@ def main():
                 sys.stdout.flush()
 
             # Clear YM2149 registers
-            ser.write(16)       # Write 16 bytes set to 0x00
-            print("")
+            for i in range(16):
+              ser.write(bytes(b'\x00'))
         except KeyboardInterrupt:
             # Clear YM2149 registers
-            ser.write(16)       # Write 16 bytes set to 0x00
-            print("")
+            for i in range(16):
+              ser.write(bytes(b'\x00'))
+            print("\nYM2149 Registers cleared")
 
 
 if __name__ == '__main__':
