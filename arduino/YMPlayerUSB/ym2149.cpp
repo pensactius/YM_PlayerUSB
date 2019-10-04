@@ -30,7 +30,11 @@ void YMSetClk2MHz(void)
   TCCR2B &= ~_BV(CS21);
   TCCR2B |=  _BV(CS20);
   // Divide the 16MHz clock by 8 -> 2MHz
-  OCR2A = 3; 
+  // 0 = 8MHz
+  // 1 = 4MHz
+  // 3 = 2MHz
+  // 7 = 1MHz
+  OCR2A = 7; 
 }
 
 void YMSetBusCtl()
