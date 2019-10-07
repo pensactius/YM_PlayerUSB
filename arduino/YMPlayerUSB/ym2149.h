@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-void YMSetClk2MHz(void);
+void YMSetClk(byte clk_div);
 void YMSetBusCtl();
 void YMWriteData(char addr, char data);
 

@@ -15,7 +15,7 @@ void _set_bus_in(void);
 enum { DATA_READ = B10 <<2, DATA_WRITE = B01 <<2, ADDRESS_MODE = B11 <<2 };
 
 // Sets a 2MHz clock D11 (PORTB3)
-void YMSetClk2MHz(void)
+void YMSetClk(byte clk_div)
 {
    DDRB  |=  _BV(PORTB3);
   // Toggle OC2A on compare match
@@ -30,11 +30,12 @@ void YMSetClk2MHz(void)
   TCCR2B &= ~_BV(CS21);
   TCCR2B |=  _BV(CS20);
   // Divide the 16MHz clock by 8 -> 2MHz
+  // This value is overriden by the first byte sent from serial.
   // 0 = 8MHz
   // 1 = 4MHz
   // 3 = 2MHz
   // 7 = 1MHz
-  OCR2A = 7; 
+  OCR2A = clk_div; 
 }
 
 void YMSetBusCtl()

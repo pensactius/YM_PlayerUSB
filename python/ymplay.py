@@ -127,7 +127,7 @@ def main():
         ym.dump_header()
         header = ym.get_header()
         data = ym.get_data()
-        print(data[-1])
+        #print(data[-1])
 
     song_min, song_sec = to_minsec(header['nb_frames'], header['frames_rate'])
     print("")
@@ -136,6 +136,22 @@ def main():
         time.sleep(2)  # Wait for Arduino reset
         #frame_t = time.time()
         frame_t = time.perf_counter()
+
+        # Send byte to set correct clock speed
+        # 2 Mhz -> 3
+        # 1 Mhz -> 7
+        if header['chip_clock'] == 2000000:
+          clk_div = 3
+        elif header['chip_clock'] == 1000000:
+          clk_div = 7
+        else:
+          raise Exception(
+                'Unsupported clock speed: 1 Mhz or 2 Mhz only')
+        clk_div = bytes([clk_div])
+        print ("Clock divider", clk_div)
+        ser.write (clk_div)        
+        time.sleep(1)
+
         try:
             for i in range(header['nb_frames']):
                 # Substract time spent in code
